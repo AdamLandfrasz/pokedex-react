@@ -2,7 +2,7 @@ import React from "react";
 import Pokemon from "./Pokemon";
 import axios from "axios";
 
-class Pokemons extends React.Component {
+class PokemonList extends React.Component {
   state = {
     pokemons: [],
   };
@@ -15,13 +15,9 @@ class Pokemons extends React.Component {
 
   render() {
     return this.state.pokemons.map((pokemon) => (
-      <Pokemon
-        key={this.state.pokemons.indexOf(pokemon)}
-        id={this.state.pokemons.indexOf(pokemon)}
-        pokemon={pokemon}
-      />
+      <Pokemon key={this.state.pokemons.indexOf(pokemon)} pokemon={pokemon} />
     ));
   }
 }
 
-export default Pokemons;
+export default PokemonList;

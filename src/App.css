@@ -7,6 +7,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
+  background: #f0f0f0;
 }
 
 a {
@@ -48,4 +49,32 @@ a {
   justify-content: space-between;
   text-transform: capitalize;
   font-size: 16px;
+}
+
+.details {
+  display: flex;
+  width: fit-content;
+  margin: 2rem auto;
+  border-radius: 10px;
+  border: 2px ridge rgb(144, 144, 144);
+  padding: 1rem;
+}
+
+.details-text {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.details-text div {
+  padding: 5px;
+  border-bottom: 1px ridge rgb(144, 144, 144);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details-text div:first-child span:last-child {
+  text-transform: capitalize;
 }

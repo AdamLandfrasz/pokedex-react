@@ -1,19 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PokemonImg from "./PokemonImg";
+import axios from "axios";
 
 class Pokemon extends React.Component {
-  render() {
-    const { name, url } = this.props.pokemon;
+  state = {
+    src: "",
+    id: "",
+  };
 
+  componentDidMount() {
+    axios.get(this.props.pokemon.url).then((resp) =>
+      this.setState({
+        src: resp.data.sprites.front_default,
+        id: resp.data.id,
+      })
+    );
+  }
+  render() {
     return (
-      <div className="pokemon">
-        <PokemonImg url={url} />
+      <Link to={`/pokemon/${this.state.id}`} className="pokemon">
+        <img
+          style={{ width: "115px", height: "115px", margin: "1rem 2rem" }}
+          src={this.state.src}
+          alt="poké_image"
+        />
         <div className="pokemon-name">
-          <Link to={url}>{name}</Link>
-          <div>#{this.props.id + 1}</div>
+          <div>{this.props.pokemon.name}</div>
+          <div>#{this.state.id}</div>
         </div>
-      </div>
+      </Link>
     );
   }
 }
