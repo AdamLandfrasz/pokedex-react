@@ -16,6 +16,16 @@ class Pokemon extends React.Component {
       })
     );
   }
+
+  componentDidUpdate() {
+    axios.get(this.props.pokemon.url).then((resp) =>
+      this.setState({
+        src: resp.data.sprites.front_default,
+        id: resp.data.id,
+      })
+    );
+  }
+
   render() {
     return (
       <Link to={`/pokemon/${this.state.id}`} className="pokemon">

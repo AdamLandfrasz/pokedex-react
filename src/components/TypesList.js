@@ -20,6 +20,7 @@ export class TypesList extends Component {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          padding: "2rem 0",
         }}
       >
         {this.state.types.map((type) => (

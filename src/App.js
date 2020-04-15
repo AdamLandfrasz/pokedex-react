@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import PokemonList from "./components/PokemonList";
 import TypesList from "./components/TypesList";
 import PokemonDetails from "./components/PokemonDetails";
+import SearchField from "./components/SearchField";
 import "./App.css";
 
 class App extends React.Component {
@@ -13,14 +14,8 @@ class App extends React.Component {
         <div className="App">
           <Navbar />
           <div className="container">
-            <Route
-              path="/pokemons"
-              render={(props) => (
-                <div className="poke-container">
-                  <PokemonList />
-                </div>
-              )}
-            />
+            <Route exact path="/" component={SearchField} />
+            <Route path="/pokemons" component={PokemonList} />
             <Route path="/types" component={TypesList} />
             <Route path="/pokemon/:id" component={PokemonDetails} />
           </div>

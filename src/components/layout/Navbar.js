@@ -5,6 +5,10 @@ function Navbar() {
   return (
     <nav style={navStyle}>
       <h1>PokéApp</h1>
+      <Link style={linkStyle} to="/">
+        Search
+      </Link>{" "}
+      |{" "}
       <Link style={linkStyle} to="/pokemons">
         Pokemons
       </Link>{" "}

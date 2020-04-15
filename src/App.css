@@ -10,6 +10,14 @@ body {
   background: #f0f0f0;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  padding: 0 2rem;
+}
+
 a {
   color: #000;
   text-decoration: none;
@@ -64,7 +72,7 @@ a {
   width: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .details-text div {
@@ -77,4 +85,30 @@ a {
 
 .details-text div:first-child span:last-child {
   text-transform: capitalize;
+}
+
+.search {
+  text-align: center;
+  padding: 2rem;
+}
+
+.search input {
+  font-size: 18px;
+  color: #727272;
+
+  padding: 8px 12px;
+  width: 20rem;
+
+  border-radius: 15px;
+  border: #cfcfcf solid 2px;
+  outline: none;
+}
+
+.search input:focus {
+  border: solid 2px #a0eeee;
+}
+
+.search input::placeholder {
+  font-size: 16px;
+  color: #cfcfcf;
 }

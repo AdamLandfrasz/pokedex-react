@@ -14,9 +14,16 @@ class PokemonList extends React.Component {
   }
 
   render() {
-    return this.state.pokemons.map((pokemon) => (
-      <Pokemon key={this.state.pokemons.indexOf(pokemon)} pokemon={pokemon} />
-    ));
+    return (
+      <div className="poke-container">
+        {this.state.pokemons.map((pokemon) => (
+          <Pokemon
+            key={this.state.pokemons.indexOf(pokemon)}
+            pokemon={pokemon}
+          />
+        ))}
+      </div>
+    );
   }
 }
 
