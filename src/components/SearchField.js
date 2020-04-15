@@ -1,59 +1,29 @@
-import React, { Component } from "react";
-import Pokemon from "./Pokemon";
-import axios from "axios";
+import React, { useState } from "react";
+import PokemonList from "./PokemonList";
 
-export class SearchField extends Component {
-  state = {
-    pokemons: [],
-    results: [],
-  };
+function SearchField(props) {
+  const [results, setResults] = useState([]);
 
-  componentDidMount() {
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=151").then((res) =>
-      this.setState({
-        pokemons: res.data.results,
-        results: [...this.state.results],
-      })
-    );
-  }
-
-  onChange(e) {
+  const onChange = (e)=> {
     if (e.target.value === "") {
-      this.setState({
-        pokemons: [...this.state.pokemons],
-        results: [],
-      });
+      setResults([]);
     } else {
-      this.setState({
-        pokemons: [...this.state.pokemons],
-        results: this.state.pokemons.filter((pokemon) =>
-          pokemon.name.includes(e.target.value.toLowerCase())
-        ),
-      });
+      setResults(props.pokemons.filter((pokemon) => pokemon.name.includes(e.target.value.toLowerCase())));
     }
   }
-
-  render() {
-    return (
-      <div>
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Who's that Pokémon?"
-            onChange={this.onChange.bind(this)}
-          />
-        </div>
-        <div className="poke-container">
-          {this.state.results.map((pokemon) => (
-            <Pokemon
-              key={this.state.results.indexOf(pokemon)}
-              pokemon={pokemon}
-            />
-          ))}
-        </div>
+  return (
+    <div>
+      <div className="search">
+        <input
+          type="text"
+          placeholder="Who's that Pokémon?"
+          onChange={onChange}
+        />
       </div>
-    );
-  }
+      <PokemonList pokemons={results}/>
+    </div>
+  );
 }
+
 
 export default SearchField;

@@ -1,62 +1,59 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Type from "./Type";
 
-export class PokemonDetails extends Component {
-  state = {
-    pokemon: { id: 0, name: "", types: [], height: "", weight: "", imgSrc: "" },
-  };
+function PokemonDetails(props) {
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [types, setTypes] = useState([]);
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [imgSrc, setImgSrc] = useState("");
 
-  componentDidMount() {
+  useEffect(() => {
     axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${this.props.match.params.id}`)
-      .then((res) =>
-        this.setState({
-          pokemon: {
-            id: res.data.id,
-            name: res.data.name,
-            types: res.data.types.map((type) => type.type.name),
-            height: res.data.height,
-            weight: res.data.weight,
-            imgSrc: res.data.sprites.front_default,
-          },
-        })
-      );
-  }
+    .get(`https://pokeapi.co/api/v2/pokemon/${props.match.params.id}`)
+    .then((res) => {
+      setId(res.data.id);
+      setName(res.data.name);
+      setTypes(res.data.types.map((type) => type.type));
+      setHeight(res.data.height);
+      setWeight(res.data.weight);
+      setImgSrc(res.data.sprites.front_default);
+    });
+    }, [props.match.params.id]);
 
-  render() {
-    return (
-      <div className="details">
-        <img
-          style={{ width: "130px", height: "130px", margin: "1rem 2rem" }}
-          src={this.state.pokemon.imgSrc}
-          alt="poké_image"
-        />
-        <div className="details-text">
-          <div>
-            <span>No.{this.state.pokemon.id}</span>
-            <span>{this.state.pokemon.name}</span>
-          </div>
-          <div>
-            <span>TYPE</span>
-            <span style={{ display: "flex" }}>
-              {this.state.pokemon.types.map((type) => (
-                <Type type={type} />
-              ))}
-            </span>
-          </div>
-          <div>
-            <span>HEIGHT</span>
-            <span>{this.state.pokemon.height / 10} meters</span>
-          </div>
-          <div>
-            <span>WEIGHT</span>
-            <span>{this.state.pokemon.weight / 10} kgs</span>
-          </div>
+  return (
+    <div className="details">
+      <img
+        style={{ width: "130px", height: "130px", margin: "1rem 2rem" }}
+        src={imgSrc}
+        alt="poké_image"
+      />
+      <div className="details-text">
+        <div>
+          <span>No.{id}</span>
+          <span>{name}</span>
+        </div>
+        <div>
+          <span>TYPE</span>
+          <span style={{ display: "flex" }}>
+            {types.map((type) => (
+              <Type key={types.indexOf(type)} type={type.name} />
+            ))}
+          </span>
+        </div>
+        <div>
+          <span>HEIGHT</span>
+          <span>{height / 10} meters</span>
+        </div>
+        <div>
+          <span>WEIGHT</span>
+          <span>{weight / 10} kgs</span>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default PokemonDetails;

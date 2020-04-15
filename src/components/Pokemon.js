@@ -1,46 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-class Pokemon extends React.Component {
-  state = {
-    src: "",
-    id: "",
-  };
+function Pokemon(props) {
+  const [src, setSrc] = useState("");
+  const [id, setId] = useState("");
 
-  componentDidMount() {
-    axios.get(this.props.pokemon.url).then((resp) =>
-      this.setState({
-        src: resp.data.sprites.front_default,
-        id: resp.data.id,
-      })
-    );
-  }
-
-  componentDidUpdate() {
-    axios.get(this.props.pokemon.url).then((resp) =>
-      this.setState({
-        src: resp.data.sprites.front_default,
-        id: resp.data.id,
-      })
-    );
-  }
-
-  render() {
-    return (
-      <Link to={`/pokemon/${this.state.id}`} className="pokemon">
-        <img
-          style={{ width: "115px", height: "115px", margin: "1rem 2rem" }}
-          src={this.state.src}
-          alt="poké_image"
-        />
-        <div className="pokemon-name">
-          <div>{this.props.pokemon.name}</div>
-          <div>#{this.state.id}</div>
-        </div>
-      </Link>
-    );
-  }
+  useEffect(() => {
+    let isMounted = true;
+    
+    axios.get(props.pokemon.url)
+    .then((resp) => {
+      if (isMounted) {
+        setSrc(resp.data.sprites.front_default);
+        setId(resp.data.id);
+      }
+    })
+    .catch((error) => console.log(error));
+    
+    return () => isMounted = false;
+  }, [props.pokemon]);
+  
+  return (
+    <Link to={`/pokemon/${id}`} className="pokemon">
+      <img
+        style={{ width: "115px", height: "115px", margin: "1rem 2rem" }}
+        src={src}
+        alt="poké_image"
+      />
+      <div className="pokemon-name">
+        <div>{props.pokemon.name}</div>
+        <div>#{id}</div>
+      </div>
+    </Link>
+  );
 }
 
 export default Pokemon;

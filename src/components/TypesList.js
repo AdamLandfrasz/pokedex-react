@@ -1,34 +1,30 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Type from "./Type";
 
-export class TypesList extends Component {
-  state = {
-    types: [],
-  };
+function TypesList() {
+  const [types, setTypes] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/type?limit=18")
-      .then((res) => this.setState({ types: res.data.results }));
-  }
+      .then((res) => setTypes(res.data.results));
+  }, []);
 
-  render() {
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "2rem 0",
-        }}
-      >
-        {this.state.types.map((type) => (
-          <Type key={type.name} type={type.name} />
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "2rem 0",
+      }}
+    >
+      {types.map((type) => (
+        <Type key={type.name} type={type.name} />
+      ))}
+    </div>
+  );
 }
 
 export default TypesList;
