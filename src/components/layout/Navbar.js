@@ -1,34 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Nav from "../elements/Nav";
 
 function Navbar() {
   return (
-    <nav style={navStyle}>
-      <h1>PokéApp</h1>
-      <Link style={linkStyle} to="/">
-        Search
-      </Link>{" "}
-      |{" "}
-      <Link style={linkStyle} to="/pokemons">
-        Pokemons
-      </Link>{" "}
-      |{" "}
-      <Link style={linkStyle} to="/types">
-        Types
-      </Link>
-    </nav>
+    <Nav>
+      <li>
+        <Link to="/pokemons">Pokemons</Link>
+      </li>
+      <li>
+        <Link to="/types">Types</Link>
+      </li>
+      <li style={{ float: "right" }}>
+        <Link to="/" style={{ lineHeight: "0" }}>
+          <img src="./logo96.png" alt="nav-icon" />
+        </Link>
+      </li>
+    </Nav>
   );
 }
-
-const navStyle = {
-  background: "#ff3838",
-  color: "#fff",
-  textAlign: "center",
-  padding: "10px",
-};
-
-const linkStyle = {
-  color: "#fff",
-};
 
 export default Navbar;

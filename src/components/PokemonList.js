@@ -5,10 +5,7 @@ function PokemonList(props) {
   return (
     <div className="poke-container">
       {props.pokemons.map((pokemon) => (
-        <Pokemon
-          key={props.pokemons.indexOf(pokemon)}
-          pokemon={pokemon}
-        />
+        <Pokemon key={props.pokemons.indexOf(pokemon)} pokemon={pokemon} />
       ))}
     </div>
   );
