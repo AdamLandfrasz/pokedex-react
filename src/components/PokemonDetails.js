@@ -27,7 +27,6 @@ function PokemonDetails(props) {
         setImgSrc(res.data.sprites.front_default);
       });
   }, [props.match.params.id]);
-  console.log(caughtPokemons);
 
   return (
     <React.Fragment>
