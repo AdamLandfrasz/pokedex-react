@@ -7,17 +7,20 @@ import TypesList from "./components/TypesList";
 import PokemonDetails from "./components/PokemonDetails";
 
 import "./App.css";
+import { CatchProvider } from "./context/CatchContext";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar />
-        <div className="container">
-          <Route path="/" component={SearchField} />
-          <Route path="/types" component={TypesList} />
-          <Route path="/pokemon/:id" component={PokemonDetails} />
-        </div>
+        <CatchProvider>
+          <div className="container">
+            <Route exact path="/" component={SearchField} />
+            <Route path="/types" component={TypesList} />
+            <Route path="/pokemon/:id" component={PokemonDetails} />
+          </div>
+        </CatchProvider>
       </div>
     </Router>
   );

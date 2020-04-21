@@ -11,10 +11,13 @@ export default styled.ul`
     font-size: 1.3rem;
     color: #fff;
     padding: 10px 20px;
-    line-height: 2;
+    line-height: 1.95;
   }
   & a:hover {
     background-color: #ad1f1f;
+  }
+  & a:active {
+    outline: none;
   }
   & li {
     float: left;

@@ -1,8 +1,8 @@
 import React, { useState, createContext } from "react";
 
-export const PokeContext = createContext();
+export const CatchContext = createContext();
 
-export function PokeProvider(props) {
+export function CatchProvider(props) {
   const [caughtPokemons, setCaughtPokemons] = useState([]);
 
   const addCaughtPokemon = (newPokemon) => {
@@ -11,8 +11,8 @@ export function PokeProvider(props) {
   };
 
   return (
-    <PokeContext.Provider value={[caughtPokemons, addCaughtPokemon]}>
+    <CatchContext.Provider value={[caughtPokemons, addCaughtPokemon]}>
       {props.children}
-    </PokeContext.Provider>
+    </CatchContext.Provider>
   );
 }

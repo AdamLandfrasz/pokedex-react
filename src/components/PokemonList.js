@@ -1,13 +1,14 @@
 import React from "react";
 import Pokemon from "./Pokemon";
+import CardContainer from "./elements/CardContainer";
 
 function PokemonList(props) {
   return (
-    <div className="poke-container">
+    <CardContainer>
       {props.pokemons.map((pokemon) => (
         <Pokemon key={props.pokemons.indexOf(pokemon)} pokemon={pokemon} />
       ))}
-    </div>
+    </CardContainer>
   );
 }
 

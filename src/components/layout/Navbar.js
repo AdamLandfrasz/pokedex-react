@@ -6,14 +6,14 @@ function Navbar() {
   return (
     <Nav>
       <li>
-        <Link to="/pokemons">Pokemons</Link>
+        <Link to="/">My Pokemons</Link>
       </li>
       <li>
         <Link to="/types">Types</Link>
       </li>
       <li style={{ float: "right" }}>
         <Link to="/" style={{ lineHeight: "0" }}>
-          <img src="./logo96.png" alt="nav-icon" />
+          <img src="../logo96.png" alt="nav-icon" />
         </Link>
       </li>
     </Nav>
