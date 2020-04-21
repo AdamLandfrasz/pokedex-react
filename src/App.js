@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-
 import Navbar from "./components/layout/Navbar";
 import SearchField from "./components/SearchField";
+import PokemonList from "./components/PokemonList";
 import TypesList from "./components/TypesList";
 import PokemonDetails from "./components/PokemonDetails";
-
+import { CatchContext } from "./context/CatchContext";
+import { PokemonProvider } from "./context/PokemonContext";
 import "./App.css";
-import { CatchProvider } from "./context/CatchContext";
 
 function App() {
+  const [caughtPokemons] = useContext(CatchContext);
+
   return (
     <Router>
       <div className="App">
         <Navbar />
-        <CatchProvider>
-          <div className="container">
+        <div className="container">
+          <PokemonProvider>
             <Route exact path="/" component={SearchField} />
+            <Route
+              exact
+              path="/my_pokemon"
+              render={(props) => <PokemonList pokemons={caughtPokemons} />}
+            />
             <Route path="/types" component={TypesList} />
             <Route path="/pokemon/:id" component={PokemonDetails} />
-          </div>
-        </CatchProvider>
+          </PokemonProvider>
+        </div>
       </div>
     </Router>
   );

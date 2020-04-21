@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
+import { PokemonContext } from "../context/PokemonContext";
 import PokemonList from "./PokemonList";
 
-function SearchField(props) {
-  const [pokemons, setPokemons] = useState([]);
+function SearchField() {
+  const pokemons = useContext(PokemonContext);
   const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=151")
-      .then((res) => {
-        setPokemons(res.data.results);
-        setResults(res.data.results);
-      })
-      .catch(() => console.log("Failed to load the data"));
-  }, []);
+  useEffect(() => setResults([...pokemons]), [pokemons]);
 
   const onChange = (e) => {
     if (e.target.value === "") {

@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <Nav>
       <li>
-        <Link to="/">My Pokemons</Link>
+        <Link to="/my_pokemon">My Pokemon</Link>
       </li>
       <li>
         <Link to="/types">Types</Link>

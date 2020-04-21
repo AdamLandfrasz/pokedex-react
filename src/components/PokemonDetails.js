@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Type from "./Type";
 import { CatchContext } from "../context/CatchContext";
+import { PokemonContext } from "../context/PokemonContext";
 
 function PokemonDetails(props) {
   const [caughtPokemons, addCaughtPokemon] = useContext(CatchContext);
+  const allPokemons = useContext(PokemonContext);
 
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -25,6 +27,7 @@ function PokemonDetails(props) {
         setImgSrc(res.data.sprites.front_default);
       });
   }, [props.match.params.id]);
+  console.log(caughtPokemons);
 
   return (
     <React.Fragment>
@@ -57,7 +60,7 @@ function PokemonDetails(props) {
           </div>
         </div>
       </div>
-      {!caughtPokemons.includes(name) ? (
+      {!caughtPokemons.some((pokemon) => pokemon.name === name) ? (
         <div
           style={{
             margin: "0 auto",
@@ -71,7 +74,10 @@ function PokemonDetails(props) {
             src="../logo96.png"
             alt="catch"
             height="40px"
-            onClick={addCaughtPokemon.bind(this, name)}
+            onClick={addCaughtPokemon.bind(
+              this,
+              allPokemons.find((pokemon) => pokemon.name === name)
+            )}
             style={{ cursor: "pointer", margin: "0 2rem" }}
           />
         </div>

@@ -35,7 +35,9 @@ function Pokemon(props) {
           <span style={{ lineHeight: 2 }}>
             #{id} {props.pokemon.name}
           </span>
-          {caughtPokemons.includes(props.pokemon.name) ? (
+          {caughtPokemons.some(
+            (pokemon) => pokemon.name === props.pokemon.name
+          ) ? (
             <img src="./logo96.png" alt="catch" height="28px" />
           ) : null}
         </div>
