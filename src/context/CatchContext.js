@@ -1,13 +1,21 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
+import dbManager from "../db/dbManager";
 
 export const CatchContext = createContext();
 
 export function CatchProvider(props) {
   const [caughtPokemons, setCaughtPokemons] = useState([]);
 
+  useEffect(() => {
+    dbManager.getAllCaughtPokemon((data) => setCaughtPokemons(data));
+  }, []);
+
   const addCaughtPokemon = (newPokemon) => {
-    if (caughtPokemons.includes(newPokemon)) return;
-    setCaughtPokemons([...caughtPokemons, newPokemon]);
+    if (!caughtPokemons.includes(newPokemon)) {
+      const updatedPokemon = [...caughtPokemons, newPokemon];
+      setCaughtPokemons(updatedPokemon);
+      dbManager.updateCaughtPokemon(updatedPokemon);
+    }
   };
 
   return (
