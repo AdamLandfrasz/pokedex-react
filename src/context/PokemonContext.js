@@ -8,7 +8,7 @@ export function PokemonProvider(props) {
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=151")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=251")
       .catch(() => console.log("Failed to load the data"))
       .then((res) => {
         setPokemons(res.data.results);
