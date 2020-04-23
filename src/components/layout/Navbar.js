@@ -3,12 +3,24 @@ import { Link } from "react-router-dom";
 import Nav from "../elements/Nav";
 import NavButton from "../elements/NavButton";
 import { ModalContext } from "../../context/ModalContext";
+import { UserContext } from "../../context/UserContext";
+import axios from "axios";
 
 function Navbar() {
-  const [, setModalShow] = useContext(ModalContext);
+  const modalContext = useContext(ModalContext);
+  const [user, setUser] = useContext(UserContext);
 
-  const showModal = () => {
-    setModalShow(true);
+  const logOut = async () => {
+    const response = await axios.get(
+      "http://localhost:5000/pokedex/api/auth/logout",
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response.data.success) {
+      setUser(undefined);
+    }
   };
 
   return (
@@ -16,17 +28,30 @@ function Navbar() {
       <li className="nav-left">
         <Link to="/my_pokemon">My Pokemon</Link>
       </li>
-      <li className="nav-left">
+      {/* <li className="nav-left">
         <Link to="/types">Types</Link>
-      </li>
+      </li> */}
       <li className="nav-right">
         <Link to="/" style={{ lineHeight: "0" }}>
           <img src="../logo96.png" alt="nav-icon" />
         </Link>
       </li>
-      <li className="nav-right">
-        <NavButton onClick={showModal}>Sign In</NavButton>
-      </li>
+      {user === undefined ? (
+        <React.Fragment>
+          <li className="nav-right">
+            <NavButton onClick={modalContext.showLoginModal}>Sign In</NavButton>
+          </li>
+          <li className="nav-right">
+            <NavButton onClick={modalContext.showRegisterModal}>
+              Register
+            </NavButton>
+          </li>
+        </React.Fragment>
+      ) : (
+        <li className="nav-right">
+          <NavButton onClick={logOut}>Log out</NavButton>
+        </li>
+      )}
     </Nav>
   );
 }

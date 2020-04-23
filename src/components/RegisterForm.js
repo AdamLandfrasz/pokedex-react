@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
 import { ModalContext } from "../context/ModalContext";
-import { UserContext } from "../context/UserContext";
 import axios from "axios";
 
 function LoginForm(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const modalContext = useContext(ModalContext);
-  const [, setUser] = useContext(UserContext);
 
   const handleUsernameInvalid = (e) => {
     e.target.setCustomValidity("");
@@ -34,27 +32,26 @@ function LoginForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.request({
-      url: "http://localhost:5000/pokedex/api/auth/login",
+      url: "http://localhost:5000/pokedex/api/auth/register",
       method: "POST",
       data: { username, password },
       withCredentials: true,
     });
 
     if (response.data.success) {
-      setUser(username);
       modalContext.hideModal();
     }
   };
 
   return (
     <div className="form">
-      <h4 className="form-header">Sign in</h4>
+      <h4 className="form-header">Register</h4>
       <form action="" onSubmit={handleSubmit} className="form-body">
         <input
           autoComplete="disabled"
           type="text"
           name="username"
-          id="login-username"
+          id="register-username"
           placeholder="Username"
           minLength="3"
           required
@@ -65,7 +62,7 @@ function LoginForm(props) {
         <input
           type="password"
           name="password"
-          id="login-password"
+          id="register-password"
           placeholder="Password"
           // pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}"
           required
@@ -73,7 +70,7 @@ function LoginForm(props) {
           onInput={handlePwInvalid}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">SIGN IN</button>
+        <button type="submit">REGISTER</button>
       </form>
     </div>
   );

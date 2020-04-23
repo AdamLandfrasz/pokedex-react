@@ -1,21 +1,21 @@
 import axios from "axios";
 
 export default {
-  getAllCaughtPokemon: (username, callback) => {
+  getAllCaughtPokemon: (callback) => {
     axios
-      .get(
-        `http://localhost:5000/pokedex/api/caught-pokemon?user=${username}`,
-        { withCredentials: true }
-      )
+      .get(`http://localhost:5000/pokedex/api/caught-pokemon`, {
+        withCredentials: true,
+      })
       .then((res) => callback(res.data.pokemonCaught));
   },
 
-  updateCaughtPokemon: (username, data) => {
+  updateCaughtPokemon: (data) => {
     axios.put(
-      `http://localhost:5000/pokedex/api/caught-pokemon?user=${username}`,
+      `http://localhost:5000/pokedex/api/caught-pokemon`,
       {
         pokemonCaught: data,
-      }
+      },
+      { withCredentials: true }
     );
   },
 };

@@ -1,19 +1,25 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../../context/ModalContext";
+import LoginForm from "../LoginForm";
+import RegisterForm from "../RegisterForm";
 
 function Modal(props) {
-  const [modalShow, setModalShow] = useContext(ModalContext);
+  const modalContext = useContext(ModalContext);
 
   const hideModal = () => {
-    if (modalShow) {
-      setModalShow(false);
+    if (modalContext.modalShow) {
+      modalContext.hideModal();
     }
   };
 
-  return modalShow ? (
+  return modalContext.modalShow ? (
     <div id="page-mask" onClick={hideModal}>
       <div id="modal" onClick={(e) => e.stopPropagation()}>
-        {props.children}
+        {modalContext.isLogin ? (
+          <LoginForm></LoginForm>
+        ) : (
+          <RegisterForm></RegisterForm>
+        )}
       </div>
     </div>
   ) : null;

@@ -9,9 +9,8 @@ import Navbar from "./components/layout/Navbar";
 import Modal from "./components/layout/Modal";
 import SearchField from "./components/SearchField";
 import PokemonList from "./components/PokemonList";
-import TypesList from "./components/TypesList";
+// import TypesList from "./components/TypesList";
 import PokemonDetails from "./components/PokemonDetails";
-import LoginForm from "./components/LoginForm";
 
 import "./App.css";
 
@@ -31,13 +30,11 @@ function App() {
                 path="/my_pokemon"
                 render={(props) => <PokemonList pokemons={caughtPokemons} />}
               />
-              <Route path="/types" component={TypesList} />
+              {/* <Route path="/types" component={TypesList} /> */}
               <Route path="/pokemon/:id" component={PokemonDetails} />
             </PokemonProvider>
           </div>
-          <Modal>
-            <LoginForm />
-          </Modal>
+          <Modal />
         </ModalProvider>
       </div>
     </Router>
