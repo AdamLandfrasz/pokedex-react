@@ -19,9 +19,6 @@ export default styled.ul`
   & a:active {
     outline: none;
   }
-  & li {
-    float: left;
-  }
   & img {
     height: 40px;
     width: 40px;
