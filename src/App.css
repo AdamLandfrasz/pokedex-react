@@ -137,7 +137,7 @@ body::-webkit-scrollbar {
   box-shadow: rgba(0, 0, 0, 0.397) 2px 2px 5px;
 }
 
-.form-body button:active {
+.form-body button:focus {
   outline: none;
 }
 

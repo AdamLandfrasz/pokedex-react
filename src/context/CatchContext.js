@@ -7,14 +7,14 @@ export function CatchProvider(props) {
   const [caughtPokemons, setCaughtPokemons] = useState([]);
 
   useEffect(() => {
-    dbManager.getAllCaughtPokemon((data) => setCaughtPokemons(data));
+    dbManager.getAllCaughtPokemon("adaom", (data) => setCaughtPokemons(data));
   }, []);
 
   const addCaughtPokemon = (newPokemon) => {
     if (!caughtPokemons.includes(newPokemon)) {
       const updatedPokemon = [...caughtPokemons, newPokemon];
       setCaughtPokemons(updatedPokemon);
-      dbManager.updateCaughtPokemon(updatedPokemon);
+      dbManager.updateCaughtPokemon("adaom", updatedPokemon);
     }
   };
 

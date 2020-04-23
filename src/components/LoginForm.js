@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ModalContext } from "../context/ModalContext";
+import axios from "axios";
+import { Cookies } from "react-cookie";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [, setModalShow] = useContext(ModalContext);
 
   const handleUsernameInvalid = (e) => {
     e.target.setCustomValidity("");
@@ -26,16 +30,29 @@ function LoginForm() {
     }
   };
 
-  const handleSubmit = (e) => {
-    console.log(`${username} - ${password}`);
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const result = await axios.post(
+      "http://localhost:5000/pokedex/api/auth/login",
+      {
+        username,
+        password,
+      }
+    );
+
+    if (result.data.success) {
+      console.log(result.headers);
+      const cookies = new Cookies();
+      cookies.set("auth-token", result.headers["auth-token"]);
+      console.log(cookies.getAll());
+      setModalShow(false);
+    }
   };
 
   return (
     <div className="form">
       <h4 className="form-header">Sign in</h4>
-      <form action="" className="form-body" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit} className="form-body">
         <input
           autoComplete="disabled"
           type="text"

@@ -7,7 +7,9 @@ import { ModalContext } from "../../context/ModalContext";
 function Navbar() {
   const [, setModalShow] = useContext(ModalContext);
 
-  const showModal = () => setModalShow(true);
+  const showModal = () => {
+    setModalShow(true);
+  };
 
   return (
     <Nav>
