@@ -46,7 +46,7 @@ function LoginForm(props) {
         method: "POST",
         mode: "cors",
         credentials: "include",
-        body: { username, password },
+        body: JSON.stringify({ username, password }),
       }
     )
       .then((res) => res.json())
