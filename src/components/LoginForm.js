@@ -38,7 +38,6 @@ function LoginForm(props) {
       method: "POST",
       data: { username, password },
       withCredentials: true,
-      crossDomain: true,
     });
 
     if (response.data.success) {
