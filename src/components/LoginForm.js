@@ -38,10 +38,7 @@ function LoginForm(props) {
       method: "POST",
       data: { username, password },
       withCredentials: true,
-      mode: "cors",
     });
-
-    console.log(response.headers);
 
     if (response.data.success) {
       setUser(username);
