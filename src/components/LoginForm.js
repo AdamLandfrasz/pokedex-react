@@ -41,6 +41,8 @@ function LoginForm(props) {
       mode: "cors",
     });
 
+    console.log(response.headers);
+
     if (response.data.success) {
       setUser(username);
       modalContext.hideModal();
