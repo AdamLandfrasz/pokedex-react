@@ -51,7 +51,7 @@ function LoginForm(props) {
     )
       .then((res) => res.json())
       .then((response) => {
-        if (response.data.success) {
+        if (response.success) {
           setUser(username);
           modalContext.hideModal();
         }
