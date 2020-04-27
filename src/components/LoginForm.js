@@ -33,12 +33,22 @@ function LoginForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.request({
-      url: "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
-      method: "POST",
-      data: { username, password },
-      withCredentials: true,
-    });
+    // const response = await axios.request({
+    //   url: "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
+    //   method: "POST",
+    //   data: { username, password },
+    //   withCredentials: true,
+    // });
+
+    const response = await fetch(
+      "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
+      {
+        method: "POST",
+        mode: "cors",
+        credentials: "include",
+        body: { username, password },
+      }
+    );
 
     if (response.data.success) {
       setUser(username);
