@@ -33,32 +33,37 @@ function LoginForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const response = await axios.request({
-    //   url: "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
-    //   method: "POST",
-    //   data: { username, password },
-    //   withCredentials: true,
-    // });
+    const response = await axios.request({
+      url: "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
+      method: "POST",
+      data: { username, password },
+      withCredentials: true,
+    });
 
-    await fetch(
-      "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
-      {
-        method: "POST",
-        mode: "cors",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      }
-    )
-      .then((res) => res.json())
-      .then((response) => {
-        if (response.success) {
-          setUser(username);
-          modalContext.hideModal();
-        }
-      });
+    if (response.success) {
+      setUser(username);
+      modalContext.hideModal();
+    }
+
+    // await fetch(
+    //   "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
+    //   {
+    //     method: "POST",
+    //     mode: "cors",
+    //     credentials: "include",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ username, password }),
+    //   }
+    // )
+    //   .then((res) => res.json())
+    //   .then((response) => {
+    //     if (response.success) {
+    //       setUser(username);
+    //       modalContext.hideModal();
+    //     }
+    //   });
   };
 
   return (
