@@ -40,7 +40,7 @@ function LoginForm(props) {
       withCredentials: true,
     });
 
-    if (response.success) {
+    if (response.data.success) {
       setUser(username);
       modalContext.hideModal();
     }
