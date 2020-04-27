@@ -40,7 +40,7 @@ function LoginForm(props) {
     //   withCredentials: true,
     // });
 
-    const response = await fetch(
+    await fetch(
       "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
       {
         method: "POST",
@@ -50,12 +50,12 @@ function LoginForm(props) {
       }
     )
       .then((res) => res.json())
-      .then((json) => console.log(json));
-
-    if (response.data.success) {
-      setUser(username);
-      modalContext.hideModal();
-    }
+      .then((response) => {
+        if (response.data.success) {
+          setUser(username);
+          modalContext.hideModal();
+        }
+      });
   };
 
   return (
