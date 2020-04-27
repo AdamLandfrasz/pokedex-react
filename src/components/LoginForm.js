@@ -33,12 +33,11 @@ function LoginForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.request({
-      url: "http://localhost:5000/pokedex/api/auth/login",
-      method: "POST",
-      data: { username, password },
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      "http://localhost:5000/pokedex/api/auth/login",
+      { username, password },
+      { withCredentials: true }
+    );
 
     if (response.data.success) {
       setUser(username);
