@@ -50,7 +50,7 @@ function LoginForm(props) {
       }
     )
       .then((res) => res.json())
-      .then((json) => console.log(json()));
+      .then((json) => console.log(json));
 
     if (response.data.success) {
       setUser(username);
