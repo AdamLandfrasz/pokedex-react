@@ -48,7 +48,7 @@ function LoginForm(props) {
         credentials: "include",
         body: { username, password },
       }
-    );
+    ).then((res) => res.json());
 
     if (response.data.success) {
       setUser(username);
