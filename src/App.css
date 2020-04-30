@@ -14,10 +14,6 @@ body {
   padding: 0 4rem;
 }
 
-body::-webkit-scrollbar {
-  display: none;
-}
-
 .nav-left {
   float: left;
 }

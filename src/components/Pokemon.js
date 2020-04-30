@@ -6,7 +6,7 @@ import { CatchContext } from "../context/CatchContext";
 import Card from "./elements/Card";
 
 function Pokemon(props) {
-  const [caughtPokemons] = useContext(CatchContext);
+  const [caughtPokemons, addCaughtPokemon] = useContext(CatchContext);
 
   const [src, setSrc] = useState("");
   const [id, setId] = useState("");
@@ -27,19 +27,32 @@ function Pokemon(props) {
     return () => (isMounted = false);
   }, [props.pokemon]);
 
+  const handleAddEvent = (e) => {
+    console.log("fired)");
+    e.preventDefault();
+    addCaughtPokemon(props.pokemon);
+  };
+
   return (
-    <Card>
+    <Card
+      caught={caughtPokemons.some((poke) => poke.name === props.pokemon.name)}
+    >
       <Link to={`/pokemon/${id}`} className="pokemon">
         <img src={src} alt="poké_image" />
         <div className="pokemon-name">
           <span style={{ lineHeight: 2 }}>
             #{id} {props.pokemon.name}
           </span>
-          {caughtPokemons.some(
-            (pokemon) => pokemon.name === props.pokemon.name
-          ) ? (
-            <img src="./logo96.png" alt="catch" height="28px" />
-          ) : null}
+          <img
+            src="./logo96.png"
+            alt="catch"
+            height="30px"
+            onClick={
+              caughtPokemons.some((poke) => poke.name === props.pokemon.name)
+                ? (e) => e.preventDefault()
+                : handleAddEvent
+            }
+          />
         </div>
       </Link>
     </Card>

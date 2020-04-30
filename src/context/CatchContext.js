@@ -15,11 +15,11 @@ export function CatchProvider(props) {
 
   const addCaughtPokemon = (newPokemon) => {
     if (!user) return;
-    if (!caughtPokemons.includes(newPokemon)) {
-      const updatedPokemon = [...caughtPokemons, newPokemon];
-      setCaughtPokemons(updatedPokemon);
-      dbManager.updateCaughtPokemon(updatedPokemon);
-    }
+    if (caughtPokemons.some((poke) => poke.name === newPokemon.name)) return;
+
+    const updatedPokemon = [...caughtPokemons, newPokemon];
+    setCaughtPokemons(updatedPokemon);
+    dbManager.updateCaughtPokemon(updatedPokemon);
   };
 
   return (
