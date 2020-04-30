@@ -8,7 +8,7 @@ export function UserProvider(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/pokedex/api/auth/validate", {
+      .get("https://pokedex-express.herokuapp.com/pokedex/api/auth/validate", {
         withCredentials: true,
       })
       .then((resp) => {
