@@ -28,7 +28,6 @@ function Pokemon(props) {
   }, [props.pokemon]);
 
   const handleAddEvent = (e) => {
-    console.log("fired)");
     e.preventDefault();
     addCaughtPokemon(props.pokemon);
   };
