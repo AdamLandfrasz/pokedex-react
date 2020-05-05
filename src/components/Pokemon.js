@@ -2,14 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { CatchContext } from "../context/CatchContext";
+import { TypeContext } from "../context/TypeContext";
 
 import Card from "./elements/Card";
 
 function Pokemon(props) {
   const [caughtPokemons, addCaughtPokemon] = useContext(CatchContext);
+  const [selectedTypes] = useContext(TypeContext);
 
   const [src, setSrc] = useState("");
   const [id, setId] = useState("");
+  const [types, setTypes] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -20,6 +23,7 @@ function Pokemon(props) {
         if (isMounted) {
           setSrc(resp.data.sprites.front_default);
           setId(resp.data.id);
+          setTypes(resp.data.types);
         }
       })
       .catch((error) => console.log(error));
@@ -32,7 +36,9 @@ function Pokemon(props) {
     addCaughtPokemon(props.pokemon);
   };
 
-  return (
+  return types.some((type) =>
+    selectedTypes.selectedTypes.map((t) => t.name).includes(type.type.name)
+  ) || selectedTypes.selectedTypes.length === 0 ? (
     <Card
       caught={caughtPokemons.some((poke) => poke.name === props.pokemon.name)}
     >
@@ -55,7 +61,7 @@ function Pokemon(props) {
         </div>
       </Link>
     </Card>
-  );
+  ) : null;
 }
 
 export default Pokemon;

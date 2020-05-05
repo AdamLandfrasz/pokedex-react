@@ -26,17 +26,20 @@ function Navbar() {
   return (
     <Nav>
       <li className="nav-left">
-        <Link to="/my_pokemon">My Pokemon</Link>
-      </li>
-      {/* <li className="nav-left">
-        <Link to="/types">Types</Link>
-      </li> */}
-      <li className="nav-right">
         <Link to="/" style={{ lineHeight: "0" }}>
           <img src="../logo96.png" alt="nav-icon" />
         </Link>
       </li>
-      {user === undefined ? (
+      {user ? (
+        <li className="nav-left">
+          <Link to="/my_pokemon">My Pokemon</Link>
+        </li>
+      ) : null}
+      {user ? (
+        <li className="nav-right">
+          <NavButton onClick={logOut}>Log out</NavButton>
+        </li>
+      ) : (
         <React.Fragment>
           <li className="nav-right">
             <NavButton onClick={modalContext.showLoginModal}>Sign In</NavButton>
@@ -47,10 +50,6 @@ function Navbar() {
             </NavButton>
           </li>
         </React.Fragment>
-      ) : (
-        <li className="nav-right">
-          <NavButton onClick={logOut}>Log out</NavButton>
-        </li>
       )}
     </Nav>
   );

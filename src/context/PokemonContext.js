@@ -7,9 +7,9 @@ export function PokemonProvider(props) {
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=251").then((res) => {
-      setPokemons(res.data.results);
-    });
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon?limit=251")
+      .then((resp) => setPokemons(resp.data.results));
   }, []);
 
   return (

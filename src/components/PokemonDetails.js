@@ -45,7 +45,7 @@ function PokemonDetails(props) {
             <span>TYPE</span>
             <span style={{ display: "flex" }}>
               {types.map((type) => (
-                <Type key={types.indexOf(type)} type={type.name} />
+                <Type key={types.indexOf(type)} type={type} active={false} />
               ))}
             </span>
           </div>

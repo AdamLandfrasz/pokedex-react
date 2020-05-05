@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import { CatchContext } from "./context/CatchContext";
 import { PokemonProvider } from "./context/PokemonContext";
 import { ModalProvider } from "./context/ModalContext";
+import { TypeProvider } from "./context/TypeContext";
 
 import Navbar from "./components/layout/Navbar";
 import Modal from "./components/layout/Modal";
 import SearchField from "./components/SearchField";
 import PokemonList from "./components/PokemonList";
-// import TypesList from "./components/TypesList";
 import PokemonDetails from "./components/PokemonDetails";
 
 import "./App.css";
@@ -24,14 +24,19 @@ function App() {
           <Navbar />
           <div className="container">
             <PokemonProvider>
-              <Route exact path="/" component={SearchField} />
-              <Route
-                exact
-                path="/my_pokemon"
-                render={(props) => <PokemonList pokemons={caughtPokemons} />}
-              />
-              {/* <Route path="/types" component={TypesList} /> */}
-              <Route path="/pokemon/:id" component={PokemonDetails} />
+              <TypeProvider>
+                <Switch>
+                  <Route exact path="/" component={SearchField} />
+                  <Route
+                    exact
+                    path="/my_pokemon"
+                    render={(props) => (
+                      <PokemonList pokemons={caughtPokemons} />
+                    )}
+                  />
+                  <Route path="/pokemon/:id" component={PokemonDetails} />
+                </Switch>
+              </TypeProvider>
             </PokemonProvider>
           </div>
           <Modal />
