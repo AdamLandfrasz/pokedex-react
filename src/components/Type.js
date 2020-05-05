@@ -15,7 +15,7 @@ function Type(props) {
     filter: props.active
       ? props.selected
         ? "grayscale(0%)"
-        : "grayscale(90%)"
+        : "grayscale(100%)"
       : "grayscale(0%)",
     border: props.active
       ? props.selected

@@ -36,8 +36,8 @@ function Pokemon(props) {
     addCaughtPokemon(props.pokemon);
   };
 
-  return types.some((type) =>
-    selectedTypes.selectedTypes.map((t) => t.name).includes(type.type.name)
+  return selectedTypes.selectedTypes.every((type) =>
+    types.map((t) => t.type.name).includes(type.name)
   ) ||
     selectedTypes.selectedTypes.length === 0 ||
     !props.typeFiltered ? (
