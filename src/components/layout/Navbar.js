@@ -12,7 +12,7 @@ function Navbar() {
 
   const logOut = async () => {
     const response = await axios.get(
-      "http://localhost:5000/pokedex/api/auth/logout",
+      "https://pokedex-express.herokuapp.com/pokedex/api/auth/logout",
       {
         withCredentials: true,
       }

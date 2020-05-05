@@ -34,7 +34,7 @@ function LoginForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post(
-      "http://localhost:5000/pokedex/api/auth/login",
+      "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
       { username, password },
       { withCredentials: true }
     );
