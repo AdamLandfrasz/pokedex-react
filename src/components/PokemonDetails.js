@@ -3,6 +3,7 @@ import axios from "axios";
 import Type from "./Type";
 import { CatchContext } from "../context/CatchContext";
 import { PokemonContext } from "../context/PokemonContext";
+import DetailsIcon from "./elements/DetailsIcon";
 
 function PokemonDetails(props) {
   const [caughtPokemons, addCaughtPokemon] = useContext(CatchContext);
@@ -27,6 +28,11 @@ function PokemonDetails(props) {
         setImgSrc(res.data.sprites.front_default);
       });
   }, [props.match.params.id]);
+
+  const handleAddEvent = (e) => {
+    e.preventDefault();
+    addCaughtPokemon(allPokemons.find((pokemon) => pokemon.name === name));
+  };
 
   return (
     <React.Fragment>
@@ -59,28 +65,27 @@ function PokemonDetails(props) {
           </div>
         </div>
       </div>
-      {!caughtPokemons.some((pokemon) => pokemon.name === name) ? (
-        <div
-          style={{
-            margin: "0 auto",
-            width: "fit-content",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          Gotta Catch 'Em All!
-          <img
-            src="../logo96.png"
-            alt="catch"
-            height="40px"
-            onClick={addCaughtPokemon.bind(
-              this,
-              allPokemons.find((pokemon) => pokemon.name === name)
-            )}
-            style={{ cursor: "pointer", margin: "0 2rem" }}
-          />
-        </div>
-      ) : null}
+
+      <div
+        style={{
+          margin: "0 auto",
+          width: "fit-content",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <DetailsIcon
+          src="../logo96.png"
+          alt="catch"
+          height="60px"
+          onClick={
+            caughtPokemons.some((poke) => poke.name === name)
+              ? (e) => e.preventDefault()
+              : handleAddEvent
+          }
+          caught={caughtPokemons.some((poke) => poke.name === name)}
+        />
+      </div>
     </React.Fragment>
   );
 }

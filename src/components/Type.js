@@ -12,9 +12,16 @@ function Type(props) {
     padding: "5px",
     margin: "5px 0 5px 3px",
     width: "100px",
-    filter:
-      props.selected || !props.active ? "grayscale(0%)" : "grayscale(90%)",
-    border: props.selected ? "2px inset" : "2px outset",
+    filter: props.active
+      ? props.selected
+        ? "grayscale(0%)"
+        : "grayscale(90%)"
+      : "grayscale(0%)",
+    border: props.active
+      ? props.selected
+        ? "2px inset"
+        : "2px outset"
+      : "none",
     transition: "200ms",
   };
 
