@@ -20,6 +20,7 @@ function Navbar() {
 
     if (response.data.success) {
       setUser(undefined);
+      window.location.reload();
     }
   };
 
