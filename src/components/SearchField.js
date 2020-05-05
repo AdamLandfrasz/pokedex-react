@@ -32,7 +32,7 @@ function SearchField() {
         />
         <TypesList />
       </div>
-      <PokemonList pokemons={results} />
+      <PokemonList pokemons={results} typeFiltered={true} />
     </div>
   );
 }

@@ -38,7 +38,9 @@ function Pokemon(props) {
 
   return types.some((type) =>
     selectedTypes.selectedTypes.map((t) => t.name).includes(type.type.name)
-  ) || selectedTypes.selectedTypes.length === 0 ? (
+  ) ||
+    selectedTypes.selectedTypes.length === 0 ||
+    !props.typeFiltered ? (
     <Card
       caught={caughtPokemons.some((poke) => poke.name === props.pokemon.name)}
     >

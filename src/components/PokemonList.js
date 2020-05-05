@@ -6,7 +6,11 @@ function PokemonList(props) {
   return (
     <CardContainer>
       {props.pokemons.map((pokemon) => (
-        <Pokemon key={props.pokemons.indexOf(pokemon)} pokemon={pokemon} />
+        <Pokemon
+          key={props.pokemons.indexOf(pokemon)}
+          pokemon={pokemon}
+          typeFiltered={props.typeFiltered}
+        />
       ))}
     </CardContainer>
   );
