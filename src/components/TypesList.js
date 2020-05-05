@@ -12,7 +12,6 @@ function TypesList() {
         flexWrap: "wrap",
         justifyContent: "space-evenly",
         alignItems: "center",
-        padding: "2rem 0",
       }}
     >
       {allTypes.map((type) => (

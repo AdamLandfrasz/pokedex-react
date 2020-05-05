@@ -51,6 +51,11 @@ export default styled.div`
   }
   & div img:hover {
     filter: grayscale(0%);
-    transform: scale(1.2);
+    ${(props) =>
+      props.caught
+        ? css``
+        : css`
+            transform: scale(1.2);
+          `}
   }
 `;
