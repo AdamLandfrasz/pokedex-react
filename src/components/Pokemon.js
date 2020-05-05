@@ -7,7 +7,6 @@ import Card from "./elements/Card";
 
 function Pokemon(props) {
   const [caughtPokemons, addCaughtPokemon] = useContext(CatchContext);
-
   const [src, setSrc] = useState("");
   const [id, setId] = useState("");
 
@@ -28,7 +27,6 @@ function Pokemon(props) {
   }, [props.pokemon]);
 
   const handleAddEvent = (e) => {
-    console.log("fired)");
     e.preventDefault();
     addCaughtPokemon(props.pokemon);
   };

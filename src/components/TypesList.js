@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import Type from "./Type";
+import { TypeContext } from "../context/TypeContext";
 
 function TypesList() {
-  const [types, setTypes] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://pokeapi.co/api/v2/type?limit=18")
-      .then((res) => setTypes(res.data.results));
-  }, []);
+  const [selectedTypes, allTypes] = useContext(TypeContext);
 
   return (
     <div
       style={{
         display: "flex",
-        flexDirection: "column",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly",
         alignItems: "center",
         padding: "2rem 0",
       }}
     >
-      {types.map((type) => (
-        <Type key={type.name} type={type.name} />
+      {allTypes.types.map((type) => (
+        <Type
+          key={type.name}
+          type={type}
+          active={true}
+          selected={selectedTypes.selectedTypes.some(
+            (selectedType) => selectedType.name === type.name
+          )}
+        />
       ))}
     </div>
   );

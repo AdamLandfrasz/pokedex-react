@@ -53,6 +53,8 @@ body {
 
 .search {
   text-align: center;
+  width: 60%;
+  margin: 0 auto;
   padding: 2rem 2rem 0 2rem;
 }
 
