@@ -14,7 +14,7 @@ function Type(props) {
     width: "100px",
     filter:
       props.selected || !props.active ? "grayscale(0%)" : "grayscale(90%)",
-    // border: props.selected ? "2px outset" : "2px inset",
+    border: props.selected ? "2px inset" : "2px outset",
     transition: "200ms",
   };
 

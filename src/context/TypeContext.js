@@ -14,12 +14,7 @@ export function TypeProvider(props) {
   }, []);
 
   return (
-    <TypeContext.Provider
-      value={[
-        { selectedTypes, setSelectedTypes },
-        { types, setTypes },
-      ]}
-    >
+    <TypeContext.Provider value={[{ selectedTypes, setSelectedTypes }, types]}>
       {props.children}
     </TypeContext.Provider>
   );

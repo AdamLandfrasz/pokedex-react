@@ -1,13 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { PokemonContext } from "../context/PokemonContext";
-import { TypeContext } from "../context/TypeContext";
 
 import PokemonList from "./PokemonList";
 import TypesList from "./TypesList";
 
 function SearchField() {
-  const [selectedTypes] = useContext(TypeContext);
-
   const pokemons = useContext(PokemonContext);
   const [results, setResults] = useState([]);
 

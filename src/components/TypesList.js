@@ -15,7 +15,7 @@ function TypesList() {
         padding: "2rem 0",
       }}
     >
-      {allTypes.types.map((type) => (
+      {allTypes.map((type) => (
         <Type
           key={type.name}
           type={type}
