@@ -11,10 +11,8 @@ export function UserProvider(props) {
       .get("http://localhost:5000/pokedex/api/auth/validate", {
         withCredentials: true,
       })
-      .then((resp) => {
-        setUser(resp.data.username);
-      })
-      .catch((err) => console.log(err));
+      .then((resp) => setUser(resp.data.username))
+      .catch((err) => setUser(undefined));
   }, []);
 
   return (
