@@ -8,7 +8,7 @@ export default styled.button`
   line-height: 1.95;
   font-family: "Raleway", sans-serif;
   color: #fff;
-  padding: 10px 20px;
+  padding: 0.6rem 1.2rem;
   border: none;
   outline: none;
   cursor: pointer;

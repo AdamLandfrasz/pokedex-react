@@ -11,6 +11,7 @@ import Modal from "./components/layout/Modal";
 import SearchField from "./components/SearchField";
 import PokemonList from "./components/PokemonList";
 import PokemonDetails from "./components/PokemonDetails";
+import ErrorPage from "./components/ErrorPage";
 
 import "./App.css";
 
@@ -35,6 +36,7 @@ function App() {
                     )}
                   />
                   <Route path="/pokemon/:id" component={PokemonDetails} />
+                  <Route component={ErrorPage} />
                 </Switch>
               </TypeProvider>
             </PokemonProvider>

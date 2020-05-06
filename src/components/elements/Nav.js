@@ -10,7 +10,7 @@ export default styled.ul`
     text-decoration: none;
     font-size: 1.3rem;
     color: #fff;
-    padding: 10px 20px;
+    padding: 0.6rem 0.8vw;
     line-height: 1.95;
   }
   & a:hover {
