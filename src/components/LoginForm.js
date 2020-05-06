@@ -3,9 +3,14 @@ import { ModalContext } from "../context/ModalContext";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
 
+import Spinner from "./layout/Spinner";
+import FormMessage from "./layout/FormMessage";
+
 function LoginForm(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [invalid, setInvalid] = useState({ isInvalid: false, message: "" });
   const modalContext = useContext(ModalContext);
   const [, setUser] = useContext(UserContext);
 
@@ -33,15 +38,30 @@ function LoginForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
-      { username, password },
-      { withCredentials: true }
-    );
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        "https://pokedex-express.herokuapp.com/pokedex/api/auth/login",
+        { username, password },
+        { withCredentials: true }
+      );
+      setIsLoading(false);
 
-    if (response.data.success) {
-      setUser(username);
-      modalContext.hideModal();
+      if (response.data.success) {
+        setUser(username);
+        modalContext.hideModal();
+      } else {
+        setInvalid({
+          isInvalid: true,
+          message: response.data.message,
+        });
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setInvalid({
+        isInvalid: true,
+        message: "Something went wrong! Please try again later!",
+      });
     }
   };
 
@@ -49,6 +69,7 @@ function LoginForm(props) {
     <div className="form">
       <h4 className="form-header">Sign in</h4>
       <form action="" onSubmit={handleSubmit} className="form-body">
+        {invalid.isInvalid ? <FormMessage message={invalid.message} /> : null}
         <input
           autoComplete="off"
           type="text"
@@ -72,7 +93,7 @@ function LoginForm(props) {
           onInput={handlePwInvalid}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">SIGN IN</button>
+        {isLoading ? <Spinner /> : <button type="submit">SIGN IN</button>}
       </form>
     </div>
   );

@@ -11,10 +11,8 @@ export function UserProvider(props) {
       .get("https://pokedex-express.herokuapp.com/pokedex/api/auth/validate", {
         withCredentials: true,
       })
-      .then((resp) => {
-        setUser(resp.data.username);
-      })
-      .catch((err) => console.log(err));
+      .then((resp) => setUser(resp.data.username))
+      .catch((err) => setUser(undefined));
   }, []);
 
   return (

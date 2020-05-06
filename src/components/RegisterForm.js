@@ -2,9 +2,14 @@ import React, { useState, useContext } from "react";
 import { ModalContext } from "../context/ModalContext";
 import axios from "axios";
 
+import Spinner from "./layout/Spinner";
+import FormMessage from "./layout/FormMessage";
+
 function LoginForm(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [invalid, setInvalid] = useState({ isInvalid: false, message: "" });
   const modalContext = useContext(ModalContext);
 
   const handleUsernameInvalid = (e) => {
@@ -31,15 +36,30 @@ function LoginForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.request({
-      url: "https://pokedex-express.herokuapp.com/pokedex/api/auth/register",
-      method: "POST",
-      data: { username, password },
-      withCredentials: true,
-    });
+    try {
+      setIsLoading(true);
+      const response = await axios.request({
+        url: "https://pokedex-express.herokuapp.com/pokedex/api/auth/register",
+        method: "POST",
+        data: { username, password },
+        withCredentials: true,
+      });
+      setIsLoading(false);
 
-    if (response.data.success) {
-      modalContext.hideModal();
+      if (response.data.success) {
+        modalContext.hideModal();
+      } else {
+        setInvalid({
+          isInvalid: true,
+          message: response.data.message,
+        });
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setInvalid({
+        isInvalid: true,
+        message: "Something went wrong! Please try again later!",
+      });
     }
   };
 
@@ -47,6 +67,7 @@ function LoginForm(props) {
     <div className="form">
       <h4 className="form-header">Register</h4>
       <form action="" onSubmit={handleSubmit} className="form-body">
+        {invalid.isInvalid ? <FormMessage message={invalid.message} /> : null}
         <input
           autoComplete="off"
           type="text"
@@ -70,7 +91,7 @@ function LoginForm(props) {
           onInput={handlePwInvalid}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">REGISTER</button>
+        {isLoading ? <Spinner /> : <button type="submit">REGISTER</button>}
       </form>
     </div>
   );
