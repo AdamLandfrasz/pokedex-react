@@ -31,18 +31,20 @@ function LoginForm(props) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "http://localhost:5000/pokedex/api/auth/login",
-      { username, password },
-      { withCredentials: true }
-    );
-
-    if (response.data.success) {
-      setUser(username);
-      modalContext.hideModal();
-    }
+    axios
+      .post(
+        "http://localhost:5000/pokedex/api/auth/login",
+        { username, password },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.data.success) {
+          setUser(username);
+          modalContext.hideModal();
+        }
+      });
   };
 
   return (
