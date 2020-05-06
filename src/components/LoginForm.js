@@ -50,7 +50,7 @@ function LoginForm(props) {
       <h4 className="form-header">Sign in</h4>
       <form action="" onSubmit={handleSubmit} className="form-body">
         <input
-          autoComplete="disabled"
+          autoComplete="off"
           type="text"
           name="username"
           id="login-username"
