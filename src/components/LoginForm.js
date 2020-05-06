@@ -17,22 +17,14 @@ function LoginForm(props) {
   const handleUsernameInvalid = (e) => {
     e.target.setCustomValidity("");
     if (!e.target.validity.valid) {
-      e.target.setCustomValidity(
-        e.target.value === ""
-          ? "Enter your username here."
-          : "The username must be at least 3 characters long."
-      );
+      e.target.setCustomValidity("Enter your username here.");
     }
   };
 
   const handlePwInvalid = (e) => {
     e.target.setCustomValidity("");
     if (!e.target.validity.valid) {
-      e.target.setCustomValidity(
-        e.target.value === ""
-          ? "Enter your password here."
-          : "The password must consist of at least 8 characters, at least one uppercase letter, one lowercase letter and one number."
-      );
+      e.target.setCustomValidity("Enter your password here.");
     }
   };
 
@@ -76,7 +68,6 @@ function LoginForm(props) {
           name="username"
           id="login-username"
           placeholder="Username"
-          minLength="3"
           required
           onInvalid={handleUsernameInvalid}
           onInput={handleUsernameInvalid}
@@ -87,7 +78,6 @@ function LoginForm(props) {
           name="password"
           id="login-password"
           placeholder="Password"
-          // pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}"
           required
           onInvalid={handlePwInvalid}
           onInput={handlePwInvalid}

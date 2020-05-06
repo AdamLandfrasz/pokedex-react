@@ -85,7 +85,7 @@ function LoginForm(props) {
           name="password"
           id="register-password"
           placeholder="Password"
-          // pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}"
+          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}"
           required
           onInvalid={handlePwInvalid}
           onInput={handlePwInvalid}
